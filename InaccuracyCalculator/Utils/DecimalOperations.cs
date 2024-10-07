@@ -25,8 +25,8 @@ namespace InaccuracyCalculator
                 val -= decimal.Truncate(val);
                 if (val == 0.0m)
                 {
-                    o_precision = precision + 1;
-                    return decimal.Round(x, precision) * 1.0m;
+                    x = decimal.Round(x, precision);
+                    break;
                 }
                 val *= 10;
                 precision++;
@@ -36,12 +36,20 @@ namespace InaccuracyCalculator
                 return decimal.Round(x, precision);
 
             if (precision < y_precision)
+            {
                 if (Math.Abs(decimal.Truncate(x * (decimal)Math.Pow(10, y_precision))) % 10 != 0)
                     return decimal.Round(x, y_precision);
-                else
-                    x = decimal.Round(x, y_precision);
-            for (int i = 0; i < y_precision - precision + 1; i++)
+            }
+            else
+            {
+                o_precision = y_precision;
+                x = decimal.Round(x, y_precision);
+            }
+            for (int i = 0; i < y_precision - precision; i++)
+            {
+                o_precision += 1;
                 x *= 1.0m;
+            }
             return x;
         }
 

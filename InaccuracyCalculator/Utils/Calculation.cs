@@ -67,7 +67,7 @@ namespace InaccuracyCalculator
                 throw new ArgumentException(paramName: nameof(SuitableBFactor), message: $"Не удалось найти подходящий коэффициент {ReferenceValues.UTFSymbols["beta"]}");
             ImprecisionB = decimal.Round(PeakToPeak * SuitableBFactor, 6);
             ImprecisionFull = decimal.Round((decimal)Math.Sqrt((double)(DecimalOperations.Pow(ImprecisionStudent, 2) + DecimalOperations.Pow(Accuracy, 2))), 6);
-            ImprecisionRelative = decimal.Round(ImprecisionFull / SelectionAverage * 100, 2);
+            ImprecisionRelative = Math.Abs(decimal.Round(ImprecisionFull / SelectionAverage * 100, 2));
             RoundedImprecision = DecimalOperations.SizovaRound(ImprecisionFull, out int ImprecisionPrecision);
             RoundedAverage = DecimalOperations.SizovaRound(SelectionAverage, out int AveragePrecision, y_precision: ImprecisionPrecision);
             if (AveragePrecision > ImprecisionPrecision)
