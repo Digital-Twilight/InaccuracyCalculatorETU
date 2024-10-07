@@ -40,14 +40,14 @@ namespace InaccuracyCalculator
                     return decimal.Round(x, y_precision);
                 else
                     x = decimal.Round(x, y_precision);
-                    for (int i = 0; i < y_precision - precision + 1; i++)
-                         x *= 1.0m;
+            for (int i = 0; i < y_precision - precision + 1; i++)
+                x *= 1.0m;
             return x;
         }
 
         public static string StringFormat(decimal x)
         {
-            if (x.ToString().EndsWith("1")) 
+            if (x.ToString().EndsWith("1"))
                 return x.ToString() + "0";
             else if (x.ToString().EndsWith("0") && !x.ToString().EndsWith("10"))
                 return x.ToString().TrimEnd('0');

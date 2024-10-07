@@ -63,7 +63,8 @@ namespace InaccuracyCalculator
             ["ind_7"] = '\u2087',
             ["ind_8"] = '\u2088',
             ["ind_9"] = '\u2089',
-            ["comb_over"] = '\u0305'
+            ["comb_over"] = '\u0305',
+            ["beta"] = '\u03B2'
         };
     }
 }

@@ -63,16 +63,20 @@ namespace InaccuracyCalculator
             foreach (TextBox textBox in SelectionGroupBox.Controls.OfType<TextBox>())
                 SelectionValues.Add(decimal.Parse(textBox.Text));
             lastCalculation = new Calculation(SelectionValues, PhysicalSymbolTextBox.Text, PhysicalUnitTextBox.Text, decimal.Parse(AccuracyTextBox.Text));
-            if (!lastCalculation.Calculate())
+            try
             {
-                MessageBox.Show(this, "Случилась какая-то ошибка при вычислении!\nВы видите данное сообщение, так как это Alpha версия.", "Ошибка вычисления", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                lastCalculation.Calculate();
+            }
+            catch (ArgumentException exc)
+            {
+                MessageBox.Show(this, $"Во время вычисления произошла следующая ошибка:\n{exc.Message}", "Упс! Ошибка...", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             CalculatedDataGridView.Rows.Add("Размах выборки", lastCalculation.PeakToPeak);
             CalculatedDataGridView.Rows.Add("Оценка грубой погрешности", "Статистический коэффициент " + lastCalculation.SuitableUFactor);
-            if (lastCalculation.OutliersCount != 0) 
+            if (lastCalculation.OutliersCount != 0)
                 CalculatedDataGridView.Rows.Add("Вывод", $"В данной выборке присутствует {lastCalculation.OutliersCount} {(lastCalculation.OutliersCount > 1 ? "грубых погрешностей" : "грубая погрешность")}");
-            else 
+            else
                 CalculatedDataGridView.Rows.Add("Вывод", $"В данной выборке грубые погрешности отсутствуют");
             CalculatedDataGridView.Rows.Add(PhysicalSymbolTextBox.Text + ReferenceValues.UTFSymbols["comb_over"], DecimalOperations.StringFormat(lastCalculation.SelectionAverage));
             CalculatedDataGridView.Rows.Add("СКО сред.", DecimalOperations.StringFormat(lastCalculation.RootMeanSquare));
@@ -80,7 +84,7 @@ namespace InaccuracyCalculator
             CalculatedDataGridView.Rows.Add("Оценка случайной погрешности по размаху выборки", DecimalOperations.StringFormat(lastCalculation.ImprecisionB));
             CalculatedDataGridView.Rows.Add("Полная погрешность результатов измерений", DecimalOperations.StringFormat(lastCalculation.ImprecisionFull));
             CalculatedDataGridView.Rows.Add("Относительная погрешность результатов измерений", DecimalOperations.StringFormat(lastCalculation.ImprecisionRelative) + '%');
-            CalculatedDataGridView.Rows.Add("Окончательный результат", $"{lastCalculation.RoundedAverage} +- {lastCalculation.RoundedImprecision}");   
+            CalculatedDataGridView.Rows.Add("Окончательный результат", $"{lastCalculation.RoundedAverage} +- {lastCalculation.RoundedImprecision}");
         }
 
         private void DOCX_MenuItem_Click(object sender, EventArgs e)
