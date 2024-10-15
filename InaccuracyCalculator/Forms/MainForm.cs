@@ -72,13 +72,20 @@ namespace InaccuracyCalculator
                 MessageBox.Show(this, $"Во время вычисления произошла следующая ошибка:\n{exc.Message}", "Упс! Ошибка...", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            CalculatedDataGridView.Rows.Add("Размах выборки", lastCalculation.PeakToPeak);
+            CalculatedDataGridView.Rows.Add("Размах выборки", DecimalOperations.StringFormat(lastCalculation.PeakToPeak));
             CalculatedDataGridView.Rows.Add("Оценка грубой погрешности", "Статистический коэффициент " + lastCalculation.SuitableUFactor);
+            for (int i = 0; i < lastCalculation.CheckPair.Count; i++)
+                CalculatedDataGridView.Rows.Add(lastCalculation.PhysicalSymbol + ReferenceValues.UTFSymbols["ind_" + (i + 1).ToString()], lastCalculation.CheckPair[i]);
             if (lastCalculation.OutliersCount != 0)
                 CalculatedDataGridView.Rows.Add("Вывод", $"В данной выборке присутствует {lastCalculation.OutliersCount} {(lastCalculation.OutliersCount > 1 ? "грубых погрешностей" : "грубая погрешность")}");
             else
                 CalculatedDataGridView.Rows.Add("Вывод", $"В данной выборке грубые погрешности отсутствуют");
-            CalculatedDataGridView.Rows.Add(PhysicalSymbolTextBox.Text + ReferenceValues.UTFSymbols["comb_over"], DecimalOperations.StringFormat(lastCalculation.SelectionAverage));
+            if (!lastCalculation.ValidSelection)
+            {
+                MessageBox.Show(this, $"Выборка не является связной", "Предупреждение!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            CalculatedDataGridView.Rows.Add(lastCalculation.PhysicalSymbol + ReferenceValues.UTFSymbols["comb_over"], DecimalOperations.StringFormat(lastCalculation.SelectionAverage));
             CalculatedDataGridView.Rows.Add("СКО сред.", DecimalOperations.StringFormat(lastCalculation.RootMeanSquare));
             CalculatedDataGridView.Rows.Add("Оценка случайной погрешности по Стьюденту", DecimalOperations.StringFormat(lastCalculation.ImprecisionStudent));
             CalculatedDataGridView.Rows.Add("Оценка случайной погрешности по размаху выборки", DecimalOperations.StringFormat(lastCalculation.ImprecisionB));

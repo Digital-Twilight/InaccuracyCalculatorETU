@@ -1,4 +1,5 @@
-﻿using DocumentFormat.OpenXml.Presentation;
+﻿using DocumentFormat.OpenXml.Office2016.Excel;
+using DocumentFormat.OpenXml.Presentation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,9 @@ namespace InaccuracyCalculator
         public decimal PeakToPeak;
         public decimal SuitableUFactor;
         public int OutliersCount = 0;
-        public List<decimal> SelectionAfterCheck;
+        public List<decimal> Outliers;
+        public List<string> CheckPair;
+        public bool ValidSelection = true;
         public decimal SelectionAverage;
         public decimal RootMeanSquare;
         public decimal SuitableStudentFactor;
@@ -39,22 +42,35 @@ namespace InaccuracyCalculator
             if (SelectionValues.Count() <= 0)
                 throw new ArgumentException(paramName: nameof(SelectionValues), message: "Выборка не может быть пустой");
             SelectionValues.Sort();
-            PeakToPeak = SelectionValues.Max() - SelectionValues.Min();
+            PeakToPeak = decimal.Round(SelectionValues.Max() - SelectionValues.Min(), 6);
             if (!ReferenceValues.UFactor95.GetBySize(SelectionValues.Count, out SuitableUFactor))
                 throw new ArgumentException(paramName: nameof(SuitableUFactor), message: "Не удалось найти подходящий коэффициент U");
-            SelectionAfterCheck = new List<decimal>();
+            Outliers = new List<decimal>();
+            CheckPair = new List<string>();
             for (int i = 0; i < SelectionValues.Count - 1; i++)
             {
                 decimal CurrentPair = Math.Abs(SelectionValues[i + 1] - SelectionValues[i]);
                 bool OutlierPresent = CurrentPair > SuitableUFactor * PeakToPeak;
+                CheckPair.Add(CurrentPair.ToString() + (OutlierPresent ? " > " : " < ") + (SuitableUFactor * PeakToPeak).ToString());
                 if (OutlierPresent)
                 {
                     OutliersCount++;
-                    if (i == 0 || i == SelectionValues.Count - 2)
+                    if (i == 0)
+                    {
+                        Outliers.Add(SelectionValues[i]);
+                        SelectionValues.RemoveAt(i);
+                    }
+                    else if (i == SelectionValues.Count - 2)
+                    {
+                        Outliers.Add(SelectionValues[i + 1]);
                         SelectionValues.RemoveAt(i + 1);
+                    }
+                    else
+                        ValidSelection = false;
                 }
-                SelectionAfterCheck.Add(SuitableUFactor * PeakToPeak);
             }
+            if (!ValidSelection)
+                return;
             SelectionAverage = SelectionValues.Average();
             decimal TempSum = 0;
             for (int i = 0; i < SelectionValues.Count; i++)

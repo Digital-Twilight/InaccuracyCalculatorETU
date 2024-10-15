@@ -22,6 +22,12 @@ namespace InaccuracyCalculator
             decimal val = x - decimal.Truncate(x);
             while (Math.Abs(decimal.Truncate(val)) <= 1)
             {
+                if (val == 1.0m)
+                {
+                    precision++;
+                    x = decimal.Round(x, precision) * 1.0m;
+                    break;
+                }
                 val -= decimal.Truncate(val);
                 if (val == 0.0m)
                 {
@@ -57,7 +63,7 @@ namespace InaccuracyCalculator
         {
             if (x.ToString().EndsWith("1"))
                 return x.ToString() + "0";
-            else if (x.ToString().EndsWith("0") && !x.ToString().EndsWith("10"))
+            else if (x.ToString().EndsWith("0") && !x.ToString().EndsWith("10") && x != 0.0m)
                 return x.ToString().TrimEnd('0');
             return x.ToString();
         }
