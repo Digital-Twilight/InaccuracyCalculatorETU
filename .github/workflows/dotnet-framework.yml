@@ -1,4 +1,4 @@
-name: Setup .NET Framework
+name: Build app
 
 on:
   push:
