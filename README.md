@@ -1,5 +1,6 @@
 # Калькулятор погрешностей
 [![build](https://github.com/Digital-Twilight/InaccuracyCalculatorETU/actions/workflows/dotnet-framework.yml/badge.svg)](https://github.com/Digital-Twilight/InaccuracyCalculatorETU/actions/workflows/dotnet-framework.yml)
+
 Администрация СПбГЭТУ «ЛЭТИ» не имеет никакого отношения к данной программе.
 Программа создана с целью помочь студентам в ходе выполнения лабораторных работ по физике.
 
