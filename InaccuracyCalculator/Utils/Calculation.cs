@@ -71,6 +71,8 @@ namespace InaccuracyCalculator
             }
             if (!ValidSelection)
                 return;
+            if (SelectionValues.Count <= 2)
+                throw new ArgumentException(paramName: nameof(SelectionValues), message: "После удаления промахов из выборки её размер стал слишком мал для дальнейших вычислений");
             SelectionAverage = SelectionValues.Average();
             decimal TempSum = 0;
             for (int i = 0; i < SelectionValues.Count; i++)

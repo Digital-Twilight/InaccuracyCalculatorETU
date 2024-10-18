@@ -42,10 +42,8 @@ namespace InaccuracyCalculator
                 return decimal.Round(x, precision);
 
             if (precision < y_precision)
-            {
                 if (Math.Abs(decimal.Truncate(x * (decimal)Math.Pow(10, y_precision))) % 10 != 0)
                     return decimal.Round(x, y_precision);
-            }
             else
             {
                 o_precision = y_precision;

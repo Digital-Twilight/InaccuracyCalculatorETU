@@ -51,6 +51,7 @@
             this.PhysicalUnitTextBox = new System.Windows.Forms.TextBox();
             this.AccuracyLabel = new System.Windows.Forms.Label();
             this.AccuracyTextBox = new System.Windows.Forms.TextBox();
+            this.Value_2 = new System.Windows.Forms.TextBox();
             this.SelectionSizeTrackBar = new InaccuracyCalculator.NoFocusTrackBar();
             this.ProgramMenu.SuspendLayout();
             this.SelectionGroupBox.SuspendLayout();
@@ -83,20 +84,20 @@
             this.DOCX_MenuItem,
             this.PDF_MenuItem});
             this.Create_MenuItem.Name = "Create_MenuItem";
-            this.Create_MenuItem.Size = new System.Drawing.Size(180, 22);
+            this.Create_MenuItem.Size = new System.Drawing.Size(150, 22);
             this.Create_MenuItem.Text = "Создать отчёт";
             // 
             // DOCX_MenuItem
             // 
             this.DOCX_MenuItem.Name = "DOCX_MenuItem";
-            this.DOCX_MenuItem.Size = new System.Drawing.Size(180, 22);
+            this.DOCX_MenuItem.Size = new System.Drawing.Size(103, 22);
             this.DOCX_MenuItem.Text = ".docx";
             this.DOCX_MenuItem.Click += new System.EventHandler(this.DOCX_MenuItem_Click);
             // 
             // PDF_MenuItem
             // 
             this.PDF_MenuItem.Name = "PDF_MenuItem";
-            this.PDF_MenuItem.Size = new System.Drawing.Size(180, 22);
+            this.PDF_MenuItem.Size = new System.Drawing.Size(103, 22);
             this.PDF_MenuItem.Text = ".pdf";
             this.PDF_MenuItem.Click += new System.EventHandler(this.PDF_MenuItem_Click);
             // 
@@ -124,16 +125,17 @@
             this.SelectionSizeTextBox.Size = new System.Drawing.Size(27, 20);
             this.SelectionSizeTextBox.TabIndex = 3;
             this.SelectionSizeTextBox.TabStop = false;
-            this.SelectionSizeTextBox.Text = "2";
+            this.SelectionSizeTextBox.Text = "3";
             this.SelectionSizeTextBox.TextChanged += new System.EventHandler(this.SelectionSizeTextBox_TextChanged);
             // 
             // SelectionGroupBox
             // 
+            this.SelectionGroupBox.Controls.Add(this.Value_2);
             this.SelectionGroupBox.Controls.Add(this.Value_1);
             this.SelectionGroupBox.Controls.Add(this.Value_0);
             this.SelectionGroupBox.Location = new System.Drawing.Point(12, 78);
             this.SelectionGroupBox.Name = "SelectionGroupBox";
-            this.SelectionGroupBox.Size = new System.Drawing.Size(128, 45);
+            this.SelectionGroupBox.Size = new System.Drawing.Size(189, 45);
             this.SelectionGroupBox.TabIndex = 5;
             this.SelectionGroupBox.TabStop = false;
             this.SelectionGroupBox.Text = "Выборка";
@@ -156,7 +158,7 @@
             // 
             // CalculateButton
             // 
-            this.CalculateButton.Location = new System.Drawing.Point(146, 95);
+            this.CalculateButton.Location = new System.Drawing.Point(207, 95);
             this.CalculateButton.Name = "CalculateButton";
             this.CalculateButton.Size = new System.Drawing.Size(116, 23);
             this.CalculateButton.TabIndex = 6;
@@ -261,14 +263,21 @@
             this.AccuracyTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.AccuracyTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumericalTextBox_KeyPress);
             // 
+            // Value_2
+            // 
+            this.Value_2.Location = new System.Drawing.Point(128, 19);
+            this.Value_2.Name = "Value_2";
+            this.Value_2.Size = new System.Drawing.Size(55, 20);
+            this.Value_2.TabIndex = 2;
+            // 
             // SelectionSizeTrackBar
             // 
             this.SelectionSizeTrackBar.Location = new System.Drawing.Point(111, 27);
-            this.SelectionSizeTrackBar.Minimum = 2;
+            this.SelectionSizeTrackBar.Minimum = 3;
             this.SelectionSizeTrackBar.Name = "SelectionSizeTrackBar";
             this.SelectionSizeTrackBar.Size = new System.Drawing.Size(104, 45);
             this.SelectionSizeTrackBar.TabIndex = 4;
-            this.SelectionSizeTrackBar.Value = 2;
+            this.SelectionSizeTrackBar.Value = 3;
             this.SelectionSizeTrackBar.ValueChanged += new System.EventHandler(this.SampleSizeTrackBar_ValueChanged);
             // 
             // MainForm
@@ -328,6 +337,7 @@
         private System.Windows.Forms.TextBox PhysicalUnitTextBox;
         private System.Windows.Forms.Label AccuracyLabel;
         private System.Windows.Forms.TextBox AccuracyTextBox;
+        private System.Windows.Forms.TextBox Value_2;
     }
 }
 

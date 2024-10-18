@@ -29,15 +29,18 @@ namespace InaccuracyCalculator
         private void SelectionSizeTextBox_TextChanged(object sender, EventArgs e)
         {
             int SelectionSize = int.Parse(SelectionSizeTextBox.Text);
-            SelectionGroupBox.Controls.Clear();
             SelectionGroupBox.Size = new Size(55 * SelectionSize + 6 * (SelectionSize + 1), 45);
             CalculateButton.Location = new Point(SelectionGroupBox.Size.Width + 18, 95);
-            for (int i = 0; i < SelectionSize; i++)
-            {
-                TextBox textBox = new TextBox() { Name = "Value_" + i.ToString(), Size = new Size(55, 20), Location = new Point(6 * (i + 1) + 55 * i, 19) };
-                textBox.KeyPress += new KeyPressEventHandler(NumericalTextBox_KeyPress);
-                SelectionGroupBox.Controls.Add(textBox);
-            }
+            if (SelectionGroupBox.Controls.Count < SelectionSize)
+                for (int i = SelectionGroupBox.Controls.Count; i < SelectionSize; i++)
+                {
+                    TextBox textBox = new TextBox() { Name = "Value_" + i.ToString(), Size = new Size(55, 20), Location = new Point(6 * (i + 1) + 55 * i, 19) };
+                    textBox.KeyPress += new KeyPressEventHandler(NumericalTextBox_KeyPress);
+                    SelectionGroupBox.Controls.Add(textBox);
+                }
+            else
+                for (int i = SelectionGroupBox.Controls.Count; i > SelectionSize; i--)
+                    SelectionGroupBox.Controls.RemoveAt(i - 1);
         }
 
         private void NumericalTextBox_KeyPress(object sender, KeyPressEventArgs e)
@@ -60,8 +63,16 @@ namespace InaccuracyCalculator
                 }
             CalculatedDataGridView.Rows.Clear();
             List<decimal> SelectionValues = new List<decimal>();
-            foreach (TextBox textBox in SelectionGroupBox.Controls.OfType<TextBox>())
-                SelectionValues.Add(decimal.Parse(textBox.Text));
+            try
+            {
+                foreach (TextBox textBox in SelectionGroupBox.Controls.OfType<TextBox>())
+                    SelectionValues.Add(decimal.Parse(textBox.Text));
+            }
+            catch (OverflowException exc) 
+            {
+                MessageBox.Show(this, $"Ошибка ввода значений выборки:\n{exc.Message}\n\nПроверьте введённые данные", "Упс! Ошибка...", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             lastCalculation = new Calculation(SelectionValues, PhysicalSymbolTextBox.Text, PhysicalUnitTextBox.Text, decimal.Parse(AccuracyTextBox.Text));
             try
             {
