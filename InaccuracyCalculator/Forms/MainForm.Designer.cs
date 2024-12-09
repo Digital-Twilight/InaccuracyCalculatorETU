@@ -39,6 +39,7 @@
             this.SelectionSizeLabel = new System.Windows.Forms.Label();
             this.SelectionSizeTextBox = new System.Windows.Forms.TextBox();
             this.SelectionGroupBox = new System.Windows.Forms.GroupBox();
+            this.Value_2 = new System.Windows.Forms.TextBox();
             this.Value_1 = new System.Windows.Forms.TextBox();
             this.Value_0 = new System.Windows.Forms.TextBox();
             this.CalculateButton = new System.Windows.Forms.Button();
@@ -51,7 +52,6 @@
             this.PhysicalUnitTextBox = new System.Windows.Forms.TextBox();
             this.AccuracyLabel = new System.Windows.Forms.Label();
             this.AccuracyTextBox = new System.Windows.Forms.TextBox();
-            this.Value_2 = new System.Windows.Forms.TextBox();
             this.SelectionSizeTrackBar = new InaccuracyCalculator.NoFocusTrackBar();
             this.ProgramMenu.SuspendLayout();
             this.SelectionGroupBox.SuspendLayout();
@@ -139,6 +139,14 @@
             this.SelectionGroupBox.TabIndex = 5;
             this.SelectionGroupBox.TabStop = false;
             this.SelectionGroupBox.Text = "Выборка";
+            // 
+            // Value_2
+            // 
+            this.Value_2.Location = new System.Drawing.Point(128, 19);
+            this.Value_2.Name = "Value_2";
+            this.Value_2.Size = new System.Drawing.Size(55, 20);
+            this.Value_2.TabIndex = 2;
+            this.Value_2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumericalTextBox_KeyPress);
             // 
             // Value_1
             // 
@@ -262,13 +270,6 @@
             this.AccuracyTextBox.TabIndex = 12;
             this.AccuracyTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.AccuracyTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumericalTextBox_KeyPress);
-            // 
-            // Value_2
-            // 
-            this.Value_2.Location = new System.Drawing.Point(128, 19);
-            this.Value_2.Name = "Value_2";
-            this.Value_2.Size = new System.Drawing.Size(55, 20);
-            this.Value_2.TabIndex = 2;
             // 
             // SelectionSizeTrackBar
             // 

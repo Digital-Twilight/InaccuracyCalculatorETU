@@ -5,6 +5,8 @@ VisualStudioVersion = 17.8.34322.80
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InaccuracyCalculator", "InaccuracyCalculator\InaccuracyCalculator.csproj", "{465532A3-895E-4170-A863-DD51BCCDCEDE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DecimalUnitTests", "DecimalUnitTests\DecimalUnitTests.csproj", "{00F0C69D-CAA3-426A-8D9B-38156AF8B1C7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{465532A3-895E-4170-A863-DD51BCCDCEDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{465532A3-895E-4170-A863-DD51BCCDCEDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{465532A3-895E-4170-A863-DD51BCCDCEDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00F0C69D-CAA3-426A-8D9B-38156AF8B1C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00F0C69D-CAA3-426A-8D9B-38156AF8B1C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00F0C69D-CAA3-426A-8D9B-38156AF8B1C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00F0C69D-CAA3-426A-8D9B-38156AF8B1C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

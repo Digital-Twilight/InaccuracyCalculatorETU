@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InaccuracyCalculator.Utils;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -68,7 +69,7 @@ namespace InaccuracyCalculator
                 foreach (TextBox textBox in SelectionGroupBox.Controls.OfType<TextBox>())
                     SelectionValues.Add(decimal.Parse(textBox.Text));
             }
-            catch (OverflowException exc) 
+            catch (OverflowException exc)
             {
                 MessageBox.Show(this, $"Ошибка ввода значений выборки:\n{exc.Message}\n\nПроверьте введённые данные", "Упс! Ошибка...", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -87,10 +88,10 @@ namespace InaccuracyCalculator
             CalculatedDataGridView.Rows.Add("Оценка грубой погрешности", "Статистический коэффициент " + lastCalculation.SuitableUFactor);
             for (int i = 0; i < lastCalculation.CheckPair.Count; i++)
                 CalculatedDataGridView.Rows.Add(lastCalculation.PhysicalSymbol + ReferenceValues.UTFSymbols["ind_" + (i + 1).ToString()], lastCalculation.CheckPair[i]);
-            if (lastCalculation.OutliersCount != 0)
-                CalculatedDataGridView.Rows.Add("Вывод", $"В данной выборке присутствует {lastCalculation.OutliersCount} {(lastCalculation.OutliersCount > 1 ? "грубых погрешностей" : "грубая погрешность")}");
+            if (lastCalculation.Outliers.Count != 0)
+                CalculatedDataGridView.Rows.Add("Вывод", $"В данной выборке присутствует {lastCalculation.Outliers.Count} {(lastCalculation.Outliers.Count > 1 ? "грубых погрешностей" : "грубая погрешность")}");
             else
-                CalculatedDataGridView.Rows.Add("Вывод", $"В данной выборке грубые погрешности отсутствуют");
+                CalculatedDataGridView.Rows.Add("Вывод", "В данной выборке грубые погрешности отсутствуют");
             if (!lastCalculation.ValidSelection)
             {
                 MessageBox.Show(this, $"Выборка не является связной", "Предупреждение!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -107,7 +108,8 @@ namespace InaccuracyCalculator
 
         private void DOCX_MenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(this, "Эта функция всё ещё находится в разработке!", "WIP", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if (lastCalculation != null)
+                TemplateEditor.FindAndReplaceTags(lastCalculation);
         }
 
         private void PDF_MenuItem_Click(object sender, EventArgs e)

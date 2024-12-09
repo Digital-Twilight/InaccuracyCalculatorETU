@@ -64,7 +64,12 @@ namespace InaccuracyCalculator
             ["ind_8"] = '\u2088',
             ["ind_9"] = '\u2089',
             ["comb_over"] = '\u0305',
-            ["beta"] = '\u03B2'
+            ["beta"] = '\u03B2',
+            ["sigma"] = '\u2211',
+            ["delta"] = '\u0394',
+            ["theta"] = '\u03b8',
+            ["small_delta"] = '\u03b4',
+            ["plusminus"] = '\u00b1'
         };
     }
 }
