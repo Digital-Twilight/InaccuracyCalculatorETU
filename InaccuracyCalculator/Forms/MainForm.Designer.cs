@@ -180,6 +180,9 @@
             this.CalculatedDataGridView.AllowUserToDeleteRows = false;
             this.CalculatedDataGridView.AllowUserToResizeColumns = false;
             this.CalculatedDataGridView.AllowUserToResizeRows = false;
+            this.CalculatedDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.CalculatedDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.CalculatedDataGridView.ColumnHeadersVisible = false;
             this.CalculatedDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -274,6 +277,7 @@
             // SelectionSizeTrackBar
             // 
             this.SelectionSizeTrackBar.Location = new System.Drawing.Point(111, 27);
+            this.SelectionSizeTrackBar.Maximum = 25;
             this.SelectionSizeTrackBar.Minimum = 3;
             this.SelectionSizeTrackBar.Name = "SelectionSizeTrackBar";
             this.SelectionSizeTrackBar.Size = new System.Drawing.Size(104, 45);
@@ -301,6 +305,7 @@
             this.Controls.Add(this.ProgramMenu);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.ProgramMenu;
+            this.MinimumSize = new System.Drawing.Size(778, 531);
             this.Name = "MainForm";
             this.Text = "Калькулятор погрешностей ЛЭТИ";
             this.ProgramMenu.ResumeLayout(false);

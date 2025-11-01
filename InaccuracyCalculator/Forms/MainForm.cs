@@ -32,6 +32,7 @@ namespace InaccuracyCalculator
             int SelectionSize = int.Parse(SelectionSizeTextBox.Text);
             SelectionGroupBox.Size = new Size(55 * SelectionSize + 6 * (SelectionSize + 1), 45);
             CalculateButton.Location = new Point(SelectionGroupBox.Size.Width + 18, 95);
+            Width = CalculateButton.Location.X + CalculateButton.Size.Width + 28;
             if (SelectionGroupBox.Controls.Count < SelectionSize)
                 for (int i = SelectionGroupBox.Controls.Count; i < SelectionSize; i++)
                 {
@@ -87,7 +88,10 @@ namespace InaccuracyCalculator
             CalculatedDataGridView.Rows.Add("Размах выборки", DecimalOperations.StringFormat(lastCalculation.PeakToPeak));
             CalculatedDataGridView.Rows.Add("Оценка грубой погрешности", "Статистический коэффициент " + lastCalculation.SuitableUFactor);
             for (int i = 0; i < lastCalculation.CheckPair.Count; i++)
-                CalculatedDataGridView.Rows.Add(lastCalculation.PhysicalSymbol + ReferenceValues.UTFSymbols["ind_" + (i + 1).ToString()], lastCalculation.CheckPair[i]);
+                if (i + 1 < 10)
+                    CalculatedDataGridView.Rows.Add(lastCalculation.PhysicalSymbol + ReferenceValues.UTFSymbols["ind_" + (i + 1).ToString()], lastCalculation.CheckPair[i]);
+                else
+                    CalculatedDataGridView.Rows.Add(lastCalculation.PhysicalSymbol + ReferenceValues.UTFSymbols["ind_" + ((i + 1) / 10).ToString()] + ReferenceValues.UTFSymbols["ind_" + ((i + 1) % 10).ToString()], lastCalculation.CheckPair[i]);
             if (lastCalculation.Outliers.Count != 0)
                 CalculatedDataGridView.Rows.Add("Вывод", $"В данной выборке присутствует {lastCalculation.Outliers.Count} {(lastCalculation.Outliers.Count > 1 ? "грубых погрешностей" : "грубая погрешность")}");
             else
